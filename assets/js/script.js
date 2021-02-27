@@ -24,24 +24,23 @@ function startQuiz() {
 //the timer itsels and game over message when timer is done
 function countdown() {
   runtime();
-  console.log("working")
-  // start.style.display = "none"
-  var timeInterval = setInterval(function () {
-    console.log("timerWorking")
-    if (timeLeft > 1) {
-      timerEl.textContent = timeLeft + ' seconds remaining';
-      timeLeft--;
-    } else if (timeLeft === 1) {
-      timerEl.textContent = timeLeft + ' second remaining';
-      timeLeft--;
-    } else {
-      timerEl.textContent = '';
-      clearInterval(timeInterval);
-      displayMessage();
-      //end quiz function
-    }
-  }, 1000);
 }
+
+var timeInterval = setInterval(function () {
+  console.log("timerWorking")
+  if (timeLeft > 1) {
+    timerEl.textContent = timeLeft + ' seconds remaining';
+    timeLeft--;
+  } else if (timeLeft === 1) {
+    timerEl.textContent = timeLeft + ' second remaining';
+    timeLeft--;
+  } else {
+    timerEl.textContent = '';
+    clearInterval(timeInterval);
+    displayMessage();
+    //end quiz function
+  }
+}, 1000);
 //displays the running time into the timerEl
 function runtime() {
   timerEl.textContent = (timeLeft);
@@ -51,13 +50,10 @@ function runtime() {
 function displayMessage() {
   mainEl.textContent = message;
 }
-
 //Hide or timeout wrong/right func when i move on to the next question: TODO//
-
-setTimeout(function() {
-  $('#main').fadeOut('fast');
-}, 2000);
-
+// setTimeout(function () {
+//   $('#main').fadeOut('fast');
+// }, 3000);
 //displays correct according to answer
 function displayCorrect() {
   mainEl.textContent = ("correct")
@@ -66,9 +62,6 @@ function displayCorrect() {
 function displayWrong() {
   mainEl.textContent = ("wrong")
 }
-
-
-
 // content of revealed question in sstartquiz func
 function displayQuestion() {
   var q = questionsArr[currentQuestion];
@@ -114,7 +107,6 @@ var questionsArr = [
     correct: "A"
   }
 ];
-
 // checkAnwer
 function checkAnswer(answer) {
   console.log(answer)
@@ -123,31 +115,33 @@ function checkAnswer(answer) {
     // answer is correct
     displayCorrect();
     console.log("correct")
-    setTimeout();
-    } else {
+  } else {
     timeLeft = timeLeft - 10;
     displayWrong();
     console.log("wrong");
-    setTimeout()
   }
   if (currentQuestion < lastQuestion) {
     currentQuestion++;
     displayQuestion();
+  }
+  if (currentQuestion == lastQuestion){
+    lastClicked();
   }
 }
 start.addEventListener("click", startQuiz);
 //create local storage for intials and score//:todo
 
 //when final answer is chosen, stop timer //
-// function lastClicked() {    
-//       // end the quiz and show the score
-//       console.log("last clik func active");
-//       if (currentQuestion == lastQuestion){
-//         clearInterval(timerEl);
-//         quiz.style.display = "none";
-//         //todo//
-//       }
-// }
+function lastClicked() {    
+      // end the quiz and show the score
+      console.log("last clik func active");
+        clearInterval(timeInterval);
+        quiz.style.display = "none";
+
+        //todo//
+      }
+}
+
 //if timer reaches zero game over
 
 // if (!tasks) {

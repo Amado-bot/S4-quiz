@@ -51,7 +51,7 @@ body{
     padding : 10px
 }
 .choice{
-    display: inline-block;
+    display: block;
     width : 135px;
     text-align: center;
     border : 1px solid grey;
