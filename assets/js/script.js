@@ -13,6 +13,15 @@ var lastQuestion = 3;
 // var score = finalTime;
 var message = 'GAME OVER ';
 var timeLeft = 120;
+//reveals question and starts countdown
+function startQuiz() {
+  start.style.display = "none";
+  displayQuestion();
+  quiz.style.display = "block";
+  console.log(countdown)
+  countdown();
+}
+//the timer itsels and game over message when timer is done
 function countdown() {
   runtime();
   console.log("working")
@@ -33,39 +42,34 @@ function countdown() {
     }
   }, 1000);
 }
-
+//displays the running time into the timerEl
 function runtime() {
   timerEl.textContent = (timeLeft);
   console.log("timer is verking")
 }
-
+//this is the game over message refrenced in the countdown
 function displayMessage() {
   mainEl.textContent = message;
 }
 
-function displayWrong() {
-  mainEl.textContent = ("wrong")
+//Hide or timeout wrong/right func when i move on to the next question: TODO//
 
-}
+setTimeout(function() {
+  $('#main').fadeOut('fast');
+}, 2000);
 
-setTimeout(function(){
-  displayCorrect(); 
-}, 2000);//wait 2 seconds
-
+//displays correct according to answer
 function displayCorrect() {
   mainEl.textContent = ("correct")
 }
-
-
-function startQuiz() {
-  start.style.display = "none";
-  displayQuestion();
-  quiz.style.display = "block";
-  console.log(countdown)
-  countdown();
+//diplays wrong according to answer
+function displayWrong() {
+  mainEl.textContent = ("wrong")
 }
 
-// render a question
+
+
+// content of revealed question in sstartquiz func
 function displayQuestion() {
   var q = questionsArr[currentQuestion];
 
@@ -74,29 +78,6 @@ function displayQuestion() {
   choiceB.innerHTML = q.choiceB;
   choiceC.innerHTML = q.choiceC;
   choiceD.innerHTML = q.choiceD;
-}
-
-// checkAnwer
-function checkAnswer(answer) {
-  console.log(answer)
-  console.log(questionsArr[currentQuestion].correct)
-  if (answer == questionsArr[currentQuestion].correct) {
-    // answer is correct
-    console.log("correct")
-  } else {
-    timeLeft = timeLeft - 10;
-    displayWrong();
-    console.log("wrong")
-
-  }
-  count = 0;
-  if (currentQuestion < lastQuestion) {
-    currentQuestion++;
-    displayQuestion();
-  } else {
-    // end the quiz and show the score
-    clearInterval(timerEl);
-  }
 }
 // create our questionsArr
 var questionsArr = [
@@ -134,24 +115,94 @@ var questionsArr = [
   }
 ];
 
-//create local storage for intials and score
-var saveTime = function(){
-  clearInterval(timeLeft);
-  localStorage.setItem("timer", JSON.stringify(timeLeft));
-}
-
-//when final answer is chosen, stop timer //
-//
-function quizOver() {
-  console.log("start is good")
-  var theEnd = questionsArr[lastQuestion];
-  if (currentQuestion == theEnd ) {
-    //add and choice is made
-    saveTime();
+// checkAnwer
+function checkAnswer(answer) {
+  console.log(answer)
+  console.log(questionsArr[currentQuestion].correct)
+  if (answer == questionsArr[currentQuestion].correct) {
+    // answer is correct
+    displayCorrect();
+    console.log("correct")
+    setTimeout();
+    } else {
+    timeLeft = timeLeft - 10;
+    displayWrong();
+    console.log("wrong");
+    setTimeout()
+  }
+  if (currentQuestion < lastQuestion) {
+    currentQuestion++;
+    displayQuestion();
   }
 }
-
 start.addEventListener("click", startQuiz);
-quizOver();
+//create local storage for intials and score//:todo
+
+//when final answer is chosen, stop timer //
+// function lastClicked() {    
+//       // end the quiz and show the score
+//       console.log("last clik func active");
+//       if (currentQuestion == lastQuestion){
+//         clearInterval(timerEl);
+//         quiz.style.display = "none";
+//         //todo//
+//       }
+// }
 //if timer reaches zero game over
-}
+
+// if (!tasks) {
+//   tasks = {
+//     toDo: [],
+//     inProgress: [],
+//     inReview: [],
+//     done: []
+//   };
+// }
+
+// // loop over object properties
+// $.each(tasks, function(list, arr) {
+//   console.log(list, arr);
+//   // then loop over sub-array
+//   arr.forEach(function(task) {
+//     createTask(task.text, task.date, list);
+//   });
+// });
+// };
+
+// var saveTasks = function() {
+// localStorage.setItem("tasks", JSON.stringify(tasks));
+// };
+
+// // modal was triggered
+// $("#task-form-modal").on("show.bs.modal", function() {
+// // clear values
+// $("#modalTaskDescription, #modalDueDate").val("");
+// });
+
+// // modal is fully visible
+// $("#task-form-modal").on("shown.bs.modal", function() {
+// // highlight textarea
+// $("#modalTaskDescription").trigger("focus");
+// });
+
+// // save button in modal was clicked
+// $("#task-form-modal .btn-primary").click(function() {
+// // get form values
+// var taskText = $("#modalTaskDescription").val();
+// var taskDate = $("#modalDueDate").val();
+
+// if (taskText && taskDate) {
+//   createTask(taskText, taskDate, "toDo");
+
+//   // close modal
+//   $("#task-form-modal").modal("hide");
+
+//   // save in tasks array
+//   tasks.toDo.push({
+//     text: taskText,
+//     date: taskDate
+//   });
+
+//   saveTasks();
+// }
+// });

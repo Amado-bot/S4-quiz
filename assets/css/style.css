@@ -1,4 +1,4 @@
-/* body{
+body{
     font-size: 20px;
     font-family: monospace;
 }
@@ -14,9 +14,21 @@
 }
 
 #start:hover{
-    border: 3px solid lightseagreen;
-    color : lightseagreen;
+    border: 3px solid rgb(0, 255, 242);
+    color : rgb(0, 21, 255);
 }
+
+#start{
+    font-size: 1.5em;
+    font-weight: bolder;
+    word-break: break-all;
+    width:100px;
+    height:auto;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    left:300px;
+    top:50px;
 
 #question{
     width:500px;
@@ -58,4 +70,4 @@
 }
 #counter{
     font-size: 3em;
-} */
+}

@@ -5,26 +5,27 @@
     <meta charset="UTF-8">
     <title>Quiz</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
 <body>
+    <div class="d-flex justify-content-center" id="timer"></div>
     <div id="container">
-        <button id="start">Start</button>
+        <button class="btn btn-primary" id="start">Start</button>
         <div id="quiz" style="display: none">
-            <div id="question"></div>
-            <div id="choices">
+            <div class="d-flex justify-content-center" id="question"></div>
+            <div class="d-flex justify-content-center" id="choices">
                 <button class="choice" id="A" onclick="checkAnswer('A')"></button>
                 <button class="choice" id="B" onclick="checkAnswer('B')"></button>
                 <button class="choice" id="C" onclick="checkAnswer('C')"></button>
                 <button class="choice" id="D" onclick="checkAnswer('D')"></button>
-            </div>
-            <div id="timer">
                 <h2 id="main"></h2>
-                <div id="counter"></div>
             </div>
+            
         </div>
     </div>
     <script src="./assets/js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </body>
 
 </html>
