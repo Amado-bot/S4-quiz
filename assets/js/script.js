@@ -107,7 +107,6 @@ var questionsArr = [
     correct: "A"
   }
 ];
-// checkAnwer
 function checkAnswer(answer) {
   console.log(answer)
   console.log(questionsArr[currentQuestion].correct)
@@ -140,7 +139,6 @@ function lastClicked() {
 
         //todo//
       }
-}
 
 //if timer reaches zero game over
 
